@@ -1,20 +1,56 @@
-h1 {
-	text-align: center;
+p {
+    text-align: center;
     font-family: Helvetica;
     font-weight: lighter;
     color: dark-grey;
+    line-height: 6px;
+    font-size: 16px;
 }
 
-h3 {
+h1 {
+	text-align: center;
+    font-family: Helvetica;
+    font-weight: normal;
+    color: dark-grey;
+}
+
+h2 {
+    text-align: center;
     font-family: Helvetica;
     font-weight: lighter;
-	color: dark-grey;
+    color: dark-grey;
+    font-size: 24px;
+}
+
+a {
+    color: blue;
+    display: block;
+    text-align: center;
+    font-family: Helvetica;
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
 }
 
 #content {
 	border: 1px solid black;
 	background: url('../img/cream_dust.png') repeat 0 0;
-	padding: 2em;
+	padding: 5px;
 	margin: 0 auto;
 	height: 450px;
 	width: 800px;

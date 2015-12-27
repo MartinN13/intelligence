@@ -78,10 +78,14 @@ window.Test = (function() {
         "initTest": function(test) {
             if (test == 1.1) {
                 // Initialise test 1
+                nextpage.style.display = 'none';
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
                     <p>Question 1:</p> \
                     <p>"I like turtles"</p> \
+                    <p><br>1. Yes, I do.</p> \
+                    <p>X. No, I do not.</p> \
+                    <p>2. I hate turtles.</p> \
                     <div class="checkboxes"> \
                         <div class="checkboxgroup"> \
                             <label for="question1.1">1</label> \
@@ -96,11 +100,17 @@ window.Test = (function() {
                             <input type="radio" name="radio" id="question1.3" /> \
                         </div> \
                     </div>';
+
+                // Add click event handlers for radio buttons, check if (clicked?), output Wrong! or Right!
             } else if (test == 1.2) {
+                nextpage.style.display = 'none';
                 content.innerHTML =
                     '<h2>Test 1</h2> \
                     <p>Question 2:</p> \
                     <p>"I like cows"</p> \
+                    <p><br>1. Yes, I do.</p> \
+                    <p>X. No, I do not.</p> \
+                    <p>2. I hate turtles.</p> \
                     <div class="checkboxes"> \
                         <div class="checkboxgroup"> \
                             <label for="question2.1">1</label> \
@@ -116,10 +126,14 @@ window.Test = (function() {
                         </div> \
                     </div>';
             } else if (test == 1.3) {
+                nextpage.style.display = 'none';
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
                     <p>Question 3:</p> \
                     <p>"I like apples"</p> \
+                    <p><br>1. Yes, I do.</p> \
+                    <p>X. No, I do not.</p> \
+                    <p>2. I hate turtles.</p> \
                     <div class="checkboxes"> \
                         <div class="checkboxgroup"> \
                             <label for="question3.1">1</label> \
@@ -164,7 +178,8 @@ window.Test = (function() {
     };
 
     var content = document.getElementById('content');
-    document.getElementById('nextpage').addEventListener("click", Test.clickFunction); 
+    var nextpage = document.getElementById('nextpage');
+    nextpage.addEventListener("click", Test.clickFunction); 
 
     // Return public functions
     return {

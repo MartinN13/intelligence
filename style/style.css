@@ -57,6 +57,14 @@ a:active {
 	border-radius: 30px;
 }
 
+#nextbutton {
+    position: absolute;
+    top: 450px;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
 body {
     background: url('../img/seamless_paper_texture.png') repeat 0 0;
 }

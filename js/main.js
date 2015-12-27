@@ -15,7 +15,7 @@ window.Test = (function() {
         // Next page button logic
         "clickFunction": function() {
             Test.clearDiv('content');
-            
+
             if (Test.testLevel == 1.0) {
                 // Load test 1 description
                 console.log('Loading test 1 description.');
@@ -55,6 +55,11 @@ window.Test = (function() {
         "initTestDesc": function(test) {
             if (test == 1.0) {
                 // Initialise test 1 description
+                content.innerHTML = 
+                    '<h2>Test 1</h2> \
+                    <p>Test 1 involves babla.</p> \
+                    <p>You have to blabla.</p> \
+                    <p><br><br><br>To start the test click on "next page".</p>';
             } else if (test == 2.0) {
                 // Initialise test 2 description
             }
@@ -92,6 +97,7 @@ window.Test = (function() {
         }
     };
 
+    var content = document.getElementById('content');
     document.getElementById('nextpage').addEventListener("click", Test.clickFunction); 
 
     // Return public functions

@@ -7,6 +7,29 @@ p {
     font-size: 16px;
 }
 
+.checkboxes {
+    display: table;
+    margin: 0 auto;
+}
+.checkboxgroup {
+    text-align: center;
+    font-family: Helvetica;
+    font-weight: lighter;
+    color: dark-grey;
+    line-height: 6px;
+    font-size: 16px;
+    word-spacing: 5px;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.checkboxgroup label {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
 h1 {
 	text-align: center;
     font-family: Helvetica;
@@ -24,7 +47,7 @@ h2 {
 
 a {
     color: blue;
-    display: block;
+    display: inline-block;
     text-align: center;
     font-family: Helvetica;
     font-weight: lighter;
@@ -57,12 +80,12 @@ a:active {
 	border-radius: 30px;
 }
 
-#nextbutton {
+#nextpage {
     position: absolute;
-    top: 450px;
-    width: 100%;
-    text-align: center;
-    display: inline-block;
+    top: 500px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 body {

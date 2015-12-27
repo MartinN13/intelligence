@@ -21,12 +21,22 @@ window.Test = (function() {
                 console.log('Loading test 1 description.');
                 Test.initTestDesc(Test.testLevel);
                 Test.testLevel = 1.1;
-            } else if (Test.test == 1.1) {
-                // Load test 1
-                console.log('Loading test 1.');
+            } else if (Test.testLevel == 1.1) {
+                // Load test 1.1
+                console.log('Loading test 1.1.');
                 Test.initTest(Test.testLevel);
                 Test.testLevel = 1.2;
             } else if (Test.testLevel == 1.2) {
+                // Load test 1.2
+                console.log('Loading test 1.2.');
+                Test.initTest(Test.testLevel);
+                Test.testLevel = 1.3;
+            } else if (Test.testLevel == 1.3) {
+                // Load test 1.3
+                console.log('Loading test 1.3.');
+                Test.initTest(Test.testLevel);
+                Test.testLevel = 1.4;
+            } else if (Test.testLevel == 1.4) {
                 // Load test 1 results
                 console.log('Loading test 1 results.');
                 Test.initTestResults(Test.testLevel);
@@ -57,9 +67,8 @@ window.Test = (function() {
                 // Initialise test 1 description
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
-                    <p>Test 1 involves babla.</p> \
-                    <p>You have to blabla.</p> \
-                    <p><br><br><br>To start the test click on "next page".</p>';
+                     <p>Test 1 involves babla.</p> \
+                     <p>You have to blabla.</p>';
             } else if (test == 2.0) {
                 // Initialise test 2 description
             }
@@ -69,6 +78,62 @@ window.Test = (function() {
         "initTest": function(test) {
             if (test == 1.1) {
                 // Initialise test 1
+                content.innerHTML = 
+                    '<h2>Test 1</h2> \
+                    <p>Question 1:</p> \
+                    <p>"I like turtles"</p> \
+                    <div class="checkboxes"> \
+                        <div class="checkboxgroup"> \
+                            <label for="question1.1">1</label> \
+                            <input type="radio" name="radio" id="question1.1" /> \
+                        </div> \
+                        <div class="checkboxgroup"> \
+                            <label for="question1.2">X</label> \
+                            <input type="radio" name="radio" id="question1.2" /> \
+                        </div> \
+                        <div class="checkboxgroup"> \
+                            <label for="question1.3">2</label> \
+                            <input type="radio" name="radio" id="question1.3" /> \
+                        </div> \
+                    </div>';
+            } else if (test == 1.2) {
+                content.innerHTML =
+                    '<h2>Test 1</h2> \
+                    <p>Question 2:</p> \
+                    <p>"I like cows"</p> \
+                    <div class="checkboxes"> \
+                        <div class="checkboxgroup"> \
+                            <label for="question2.1">1</label> \
+                            <input type="radio" name="radio" id="question2.1" /> \
+                        </div> \
+                        <div class="checkboxgroup"> \
+                            <label for="question2.2">X</label> \
+                            <input type="radio" name="radio" id="question2.2" /> \
+                        </div> \
+                        <div class="checkboxgroup"> \
+                            <label for="question2.3">2</label> \
+                            <input type="radio" name="radio" id="question2.3" /> \
+                        </div> \
+                    </div>';
+            } else if (test == 1.3) {
+                content.innerHTML = 
+                    '<h2>Test 1</h2> \
+                    <p>Question 3:</p> \
+                    <p>"I like apples"</p> \
+                    <div class="checkboxes"> \
+                        <div class="checkboxgroup"> \
+                            <label for="question3.1">1</label> \
+                            <input type="radio" name="radio" id="question3.1" /> \
+                        </div> \
+                        <div class="checkboxgroup"> \
+                            <label for="question3.2">X</label> \
+                            <input type="radio" name="radio" id="question3.2" /> \
+                        </div> \
+                        <div class="checkboxgroup"> \
+                            <label for="question3.3">2</label> \
+                            <input type="radio" name="radio" id="question3.3" /> \
+                        </div> \
+                    </div>';
             } else if (test == 2.1) {
                 // Initialise test 2
             }
@@ -78,6 +143,7 @@ window.Test = (function() {
         "initTestResults": function(test) {
             if (test == 1.2) {
                 // Initialise test 1 results
+
             } else if (test == 2.2) {
                 // Initialise test 2 results
             }

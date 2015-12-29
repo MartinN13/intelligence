@@ -6,12 +6,6 @@ window.Test = (function() {
     var Test = {
         "testLevel": 1.0,
 
-        "answers": [
-                "1",
-                "1",
-                "2"
-        ],
-
         // Next page button logic
         "clickFunction": function() {
             Test.clearDiv('content');
@@ -56,6 +50,50 @@ window.Test = (function() {
             }
         },
 
+        // Checks if the answer is right or wrong, then displays next page button
+        "radioClick": function() {
+            if (this.id == 'question1.1' || this.id == 'question1.2' || this.id == 'question1.3') {
+                // Make it impossible to change choice
+                document.getElementById('question1.1').disabled = true;
+                document.getElementById('question1.2').disabled = true;
+                document.getElementById('question1.3').disabled = true;
+
+                if (this.id == 'question1.1') {
+                    // show right answer text
+                    content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                } else {
+                    // Show wrong answer text
+                    content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                }
+                // Show next page
+                nextpage.style.display = 'inline-block';
+
+            } else if (this.id == 'question2.1' || this.id == 'question2.2' || this.id == 'question2.3') {
+                document.getElementById('question2.1').disabled = true;
+                document.getElementById('question2.2').disabled = true;
+                document.getElementById('question2.3').disabled = true;
+
+                if (this.id == 'question2.1') {
+                    content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                } else {
+                    content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                }
+                nextpage.style.display = 'inline-block';
+
+            } else if (this.id == 'question3.1' || this.id == 'question3.2' || this.id == 'question3.3') {
+                document.getElementById('question3.1').disabled = true;
+                document.getElementById('question3.2').disabled = true;
+                document.getElementById('question3.3').disabled = true;
+
+                if (this.id == 'question3.2') {
+                    content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                } else {
+                    content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                }
+                nextpage.style.display = 'inline-block';
+            }
+        },
+
         // Clears the innerHTML of a div
         "clearDiv": function(element) {
                 document.getElementById(element).innerHTML = "";
@@ -77,7 +115,7 @@ window.Test = (function() {
         // Initialises a test
         "initTest": function(test) {
             if (test == 1.1) {
-                // Initialise test 1
+                // Initialise test 1.1
                 nextpage.style.display = 'none';
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
@@ -101,8 +139,12 @@ window.Test = (function() {
                         </div> \
                     </div>';
 
-                // Add click event handlers for radio buttons, check if (clicked?), output Wrong! or Right!
+                // Add click event handlers for radio buttons
+                document.getElementById('question1.1').addEventListener("click", Test.radioClick);
+                document.getElementById('question1.2').addEventListener("click", Test.radioClick);
+                document.getElementById('question1.3').addEventListener("click", Test.radioClick);
             } else if (test == 1.2) {
+                // Initialise test 1.2
                 nextpage.style.display = 'none';
                 content.innerHTML =
                     '<h2>Test 1</h2> \
@@ -125,7 +167,13 @@ window.Test = (function() {
                             <input type="radio" name="radio" id="question2.3" /> \
                         </div> \
                     </div>';
+
+                // Add click event handlers for radio buttons
+                document.getElementById('question2.1').addEventListener("click", Test.radioClick);
+                document.getElementById('question2.2').addEventListener("click", Test.radioClick);
+                document.getElementById('question2.3').addEventListener("click", Test.radioClick);
             } else if (test == 1.3) {
+                // Initialise test 1.3
                 nextpage.style.display = 'none';
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
@@ -148,6 +196,11 @@ window.Test = (function() {
                             <input type="radio" name="radio" id="question3.3" /> \
                         </div> \
                     </div>';
+
+                // Add click event handlers for radio buttons
+                document.getElementById('question3.1').addEventListener("click", Test.radioClick);
+                document.getElementById('question3.2').addEventListener("click", Test.radioClick);
+                document.getElementById('question3.3').addEventListener("click", Test.radioClick);
             } else if (test == 2.1) {
                 // Initialise test 2
             }

@@ -82,7 +82,7 @@ a:active {
 
 #nextpage {
     position: absolute;
-    top: 500px;
+    top: 450px;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
@@ -94,6 +94,15 @@ a:active {
 
 #wrong {
     color: red;
+}
+
+#score {
+    display: inline-block;
+    position: absolute;
+    top: 485px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 body {

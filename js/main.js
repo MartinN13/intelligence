@@ -5,6 +5,7 @@ window.Test = (function() {
 
     var Test = {
         "testLevel": 1.0,
+        "currentScore": 0,
 
         // Next page button logic
         "clickFunction": function() {
@@ -59,8 +60,10 @@ window.Test = (function() {
                 document.getElementById('question1.3').disabled = true;
 
                 if (this.id == 'question1.1') {
-                    // show right answer text
+                    // show right answer text and increase score
                     content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                    Test.currentScore += 3;
+                    score.innerHTML = 'Current score: ' + Test.currentScore;
                 } else {
                     // Show wrong answer text
                     content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
@@ -75,6 +78,8 @@ window.Test = (function() {
 
                 if (this.id == 'question2.1') {
                     content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                    Test.currentScore += 3;
+                    score.innerHTML = 'Current score: ' + Test.currentScore;
                 } else {
                     content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
                 }
@@ -87,6 +92,8 @@ window.Test = (function() {
 
                 if (this.id == 'question3.3') {
                     content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                    Test.currentScore += 3;
+                    score.innerHTML = 'Current score: ' + Test.currentScore;
                 } else {
                     content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
                 }
@@ -105,8 +112,9 @@ window.Test = (function() {
                 // Initialise test 1 description
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
-                     <p>Test 1 involves babla.</p> \
-                     <p>You have to blabla.</p>';
+                    <p>Test 1 involves answering 3 questions.</p> \
+                    <p>You will be given three choices for each question.</p> \
+                    <p>You only have one try per question, and each correct answer gives you 3 points.';
             } else if (test == 2.0) {
                 // Initialise test 2 description
             }
@@ -230,9 +238,16 @@ window.Test = (function() {
         }
     };
 
+    // Define id helpers
+    var score = document.getElementById('score');
     var content = document.getElementById('content');
     var nextpage = document.getElementById('nextpage');
-    nextpage.addEventListener("click", Test.clickFunction); 
+
+    // Add click-event to next page link
+    nextpage.addEventListener("click", Test.clickFunction);
+
+    // Set score to 0 at start
+    score.innerHTML = 'Current score: ' + Test.currentScore;
 
     // Return public functions
     return {

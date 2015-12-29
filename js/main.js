@@ -85,7 +85,7 @@ window.Test = (function() {
                 document.getElementById('question3.2').disabled = true;
                 document.getElementById('question3.3').disabled = true;
 
-                if (this.id == 'question3.2') {
+                if (this.id == 'question3.3') {
                     content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
                 } else {
                     content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
@@ -120,10 +120,10 @@ window.Test = (function() {
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
                     <p>Question 1:</p> \
-                    <p>"I like turtles"</p> \
-                    <p><br>1. Yes, I do.</p> \
-                    <p>X. No, I do not.</p> \
-                    <p>2. I hate turtles.</p> \
+                    <p>"What was the name of Dr. Dre\'s first solo album?"</p> \
+                    <p><br>1. The Chronic</p> \
+                    <p>X. 2001</p> \
+                    <p>2. Compton</p> \
                     <div class="checkboxes"> \
                         <div class="checkboxgroup"> \
                             <label for="question1.1">1</label> \
@@ -149,10 +149,10 @@ window.Test = (function() {
                 content.innerHTML =
                     '<h2>Test 1</h2> \
                     <p>Question 2:</p> \
-                    <p>"I like cows"</p> \
-                    <p><br>1. Yes, I do.</p> \
-                    <p>X. No, I do not.</p> \
-                    <p>2. I hate turtles.</p> \
+                    <p>"5 + 5 / 5 * 5 - 5 = ?"</p> \
+                    <p><br>1. 5</p> \
+                    <p>X. 20</p> \
+                    <p>2. 25</p> \
                     <div class="checkboxes"> \
                         <div class="checkboxgroup"> \
                             <label for="question2.1">1</label> \
@@ -178,10 +178,10 @@ window.Test = (function() {
                 content.innerHTML = 
                     '<h2>Test 1</h2> \
                     <p>Question 3:</p> \
-                    <p>"I like apples"</p> \
-                    <p><br>1. Yes, I do.</p> \
-                    <p>X. No, I do not.</p> \
-                    <p>2. I hate turtles.</p> \
+                    <p>"Which word is spelled correctly?"</p> \
+                    <p><br>1. "definately".</p> \
+                    <p>X. "definetly".</p> \
+                    <p>2. "definitely".</p> \
                     <div class="checkboxes"> \
                         <div class="checkboxgroup"> \
                             <label for="question3.1">1</label> \

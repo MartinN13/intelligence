@@ -6,6 +6,7 @@ window.Test = (function() {
     var Test = {
         "testLevel": 1.0,
         "currentScore": 0,
+        "fullScore": 0,
 
         // Next page button logic
         "clickFunction": function() {
@@ -30,11 +31,6 @@ window.Test = (function() {
                 // Load test 1.3
                 console.log('Loading test 1.3.');
                 Test.initTest(Test.testLevel);
-                Test.testLevel = 1.4;
-            } else if (Test.testLevel == 1.4) {
-                // Load test 1 results
-                console.log('Loading test 1 results.');
-                Test.initTestResults(Test.testLevel);
                 Test.testLevel = 2.0;
             } else if (Test.testLevel == 2.0) {
                 // Load test 2 description
@@ -101,6 +97,18 @@ window.Test = (function() {
             }
         },
 
+        // Handles button logic in test 2
+        "buttonClick": function() {
+            if (this.id == 'button4') {
+                content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                Test.currentScore += 3;
+                score.innerHTML = 'Current score: ' + (Test.fullScore + Test.currentScore);
+            } else if (this.id == 'button2' || this.id == 'button3' || this.id == 'button4') {
+                content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+            }
+            nextpage.style.display = 'inline-block';
+        },
+
         // Clears the innerHTML of a div
         "clearDiv": function(element) {
                 document.getElementById(element).innerHTML = "";
@@ -117,6 +125,14 @@ window.Test = (function() {
                     <p>You only have one try per question, and each correct answer gives you 3 points.';
             } else if (test == 2.0) {
                 // Initialise test 2 description
+                    content.innerHTML = 
+                    '<h2>Test 2</h2> \
+                    <p>Test 2 is a game of Fizz Buzz.</p> \
+                    <p>Fizz Buzz is a game where every number divisible by 3 is replaced by the word "Fizz",</p> \
+                    <p>every number divisible by 5 is replaced by the word "Buzz", and if divisible by 3 AND 5</p> \
+                    <p>the number is replaced by the word "Fizz Buzz". \
+                    <p><br>You will be shown a sequence and your goal is to choose the correct button to continue the sequence.</p> \
+                    <p>You only have one try, and this test gives you 3 points.';
             }
         },
 
@@ -211,6 +227,31 @@ window.Test = (function() {
                 document.getElementById('question3.3').addEventListener("click", Test.radioClick);
             } else if (test == 2.1) {
                 // Initialise test 2
+                Test.fullScore += Test.currentScore;
+                Test.currentScore = 0;
+                score.innerHTML = 'Current score: ' + Test.fullScore;
+
+                nextpage.style.display = 'none';
+                 content.innerHTML = 
+                    '<h2>Test 2</h2> \
+                    <p>"1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, ..."</p> \
+                    <div class="buttons"> \
+                        <button type="button" class="btn" id="button1">15</button> \
+                        <button type="button" class="btn" id="button2">Fizz</button> \
+                        <button type="button" class="btn" id="button3">Buzz</button> \
+                        <button type="button" class="btn" id="button4">Fizz Buzz</button> \
+                    </div>';
+
+                // Add click event handler for buttons
+                document.getElementById('button1').addEventListener("click", Test.buttonClick);
+                document.getElementById('button2').addEventListener("click", Test.buttonClick);
+                document.getElementById('button3').addEventListener("click", Test.buttonClick);
+                document.getElementById('button4').addEventListener("click", Test.buttonClick);
+            } else if (test == 3.1) {
+                // Initialise test 3
+                Test.fullScore += Test.currentScore;
+                Test.currentScore = 0;
+                score.innerHTML = 'Current score: ' + Test.fullScore;
             }
         },
 
@@ -218,6 +259,8 @@ window.Test = (function() {
         "initTestResults": function(test) {
             if (test == 1.2) {
                 // Initialise test 1 results
+                Test.fullScore = Test.currentScore;
+                score.innerHTML = 'Current score: ' + Test.fullScore;
 
             } else if (test == 2.2) {
                 // Initialise test 2 results
@@ -231,6 +274,7 @@ window.Test = (function() {
             if (test == 1.1) {
                 test = 1.0;
                 // Remove score from test 1 and re-initialise it
+                Test.currentScore = 0;
             } else if (test == 2.1) {
                 test = 2.0;
                 // Remove score from test 1 and re-initialise it

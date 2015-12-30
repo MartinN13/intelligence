@@ -39,11 +39,11 @@ window.Test = (function() {
             } else if (Test.testLevel == 2.1) {
                 // Load test 2
                 Test.initTest(Test.testLevel);
-                Test.testLevel = 2.2;
-            } else if (Test.testLevel == 2.2) {
-                // Load test 2 results etc.
-                Test.initTestResults(Test.testLevel);
                 Test.testLevel = 3.0;
+            } else if (Test.testLevel == 3.0) {
+                // Load test 3 description.
+                Test.initTestDesc(Test.testLevel);
+                Test.testLevel = 3.1;
             }
         },
 
@@ -252,18 +252,6 @@ window.Test = (function() {
                 Test.fullScore += Test.currentScore;
                 Test.currentScore = 0;
                 score.innerHTML = 'Current score: ' + Test.fullScore;
-            }
-        },
-
-        // Initialises a test result
-        "initTestResults": function(test) {
-            if (test == 1.2) {
-                // Initialise test 1 results
-                Test.fullScore = Test.currentScore;
-                score.innerHTML = 'Current score: ' + Test.fullScore;
-
-            } else if (test == 2.2) {
-                // Initialise test 2 results
             }
         },
 

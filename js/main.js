@@ -5,13 +5,14 @@ window.Test = (function() {
 
     var Test = {
         "testLevel": 1.0,
-        "currentScore": 0,
-        "fullScore": 0,
+        "test1Score": 0,
+        "test2Score": 0,
+        "test3Score": 0,
+        "test4Score": 0,
+        "test5Score": 0,
 
         // Next page button logic
         "clickFunction": function() {
-            Test.clearDiv('content');
-
             if (Test.testLevel == 1.0) {
                 // Load test 1 description
                 console.log('Loading test 1 description.');
@@ -34,14 +35,17 @@ window.Test = (function() {
                 Test.testLevel = 2.0;
             } else if (Test.testLevel == 2.0) {
                 // Load test 2 description
+                console.log('Loading test 2 description.');
                 Test.initTestDesc(Test.testLevel);
                 Test.testLevel = 2.1;
             } else if (Test.testLevel == 2.1) {
                 // Load test 2
+                console.log('Loading test 2.');
                 Test.initTest(Test.testLevel);
                 Test.testLevel = 3.0;
             } else if (Test.testLevel == 3.0) {
                 // Load test 3 description.
+                console.log('Loading test 3 description.');
                 Test.initTestDesc(Test.testLevel);
                 Test.testLevel = 3.1;
             }
@@ -50,48 +54,76 @@ window.Test = (function() {
         // Checks if the answer is right or wrong, then displays next page button
         "radioClick": function() {
             if (this.id == 'question1.1' || this.id == 'question1.2' || this.id == 'question1.3') {
-                // Make it impossible to change choice
-                document.getElementById('question1.1').disabled = true;
-                document.getElementById('question1.2').disabled = true;
-                document.getElementById('question1.3').disabled = true;
-
                 if (this.id == 'question1.1') {
-                    // show right answer text and increase score
+                    // show right answer text, disable button 2 and 3, and increase score
                     content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
-                    Test.currentScore += 3;
-                    score.innerHTML = 'Current score: ' + Test.currentScore;
+                    document.getElementById('question1.1').checked = true;
+                    document.getElementById('question1.2').disabled = true;
+                    document.getElementById('question1.3').disabled = true;
+                    Test.test1Score += 3;
+                    score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                           Test.test4Score + Test.test5Score);
                 } else {
                     // Show wrong answer text
                     content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                    if (this.id == 'question1.2') {
+                        // Disable 1.1 and 1.3
+                        document.getElementById('question1.1').disabled = true;
+                        document.getElementById('question1.2').checked = true;
+                        document.getElementById('question1.3').disabled = true;
+                    } else {
+                        // Disable 1.1 and 1.2
+                        document.getElementById('question1.1').disabled = true;
+                        document.getElementById('question1.2').disabled = true;
+                        document.getElementById('question1.3').checked = true;
+                    }
                 }
                 // Show next page
                 nextpage.style.display = 'inline-block';
 
             } else if (this.id == 'question2.1' || this.id == 'question2.2' || this.id == 'question2.3') {
-                document.getElementById('question2.1').disabled = true;
-                document.getElementById('question2.2').disabled = true;
-                document.getElementById('question2.3').disabled = true;
-
                 if (this.id == 'question2.1') {
                     content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
-                    Test.currentScore += 3;
-                    score.innerHTML = 'Current score: ' + Test.currentScore;
+                    document.getElementById('question2.1').checked = true;
+                    document.getElementById('question2.2').disabled = true;
+                    document.getElementById('question2.3').disabled = true;
+                    Test.test1Score += 3;
+                    score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                           Test.test4Score + Test.test5Score);
                 } else {
                     content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                    if (this.id == 'question2.2') {
+                        document.getElementById('question2.1').disabled = true;
+                        document.getElementById('question2.2').checked = true;
+                        document.getElementById('question2.3').disabled = true;
+                    } else {
+                        document.getElementById('question2.1').disabled = true;
+                        document.getElementById('question2.2').disabled = true;
+                        document.getElementById('question2.3').checked = true;
+                    }
                 }
                 nextpage.style.display = 'inline-block';
 
             } else if (this.id == 'question3.1' || this.id == 'question3.2' || this.id == 'question3.3') {
-                document.getElementById('question3.1').disabled = true;
-                document.getElementById('question3.2').disabled = true;
-                document.getElementById('question3.3').disabled = true;
-
                 if (this.id == 'question3.3') {
                     content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
-                    Test.currentScore += 3;
-                    score.innerHTML = 'Current score: ' + Test.currentScore;
+                    document.getElementById('question3.1').disabled = true;
+                    document.getElementById('question3.2').disabled = true;
+                    document.getElementById('question3.3').checked = true;
+                    Test.test1Score += 3;
+                    score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                           Test.test4Score + Test.test5Score);
                 } else {
                     content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                    if (this.id == 'question3.2') {
+                        document.getElementById('question3.1').disabled = true;
+                        document.getElementById('question3.2').checked = true;
+                        document.getElementById('question3.3').disabled = true;
+                    } else {
+                        document.getElementById('question3.1').checked = true;
+                        document.getElementById('question3.2').disabled = true;
+                        document.getElementById('question3.3').disabled = true;
+                    }
                 }
                 nextpage.style.display = 'inline-block';
             }
@@ -101,17 +133,13 @@ window.Test = (function() {
         "buttonClick": function() {
             if (this.id == 'button4') {
                 content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
-                Test.currentScore += 3;
-                score.innerHTML = 'Current score: ' + (Test.fullScore + Test.currentScore);
+                Test.test2Score += 3;
+                score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                       Test.test4Score + Test.test5Score);
             } else if (this.id == 'button2' || this.id == 'button3' || this.id == 'button4') {
                 content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
             }
             nextpage.style.display = 'inline-block';
-        },
-
-        // Clears the innerHTML of a div
-        "clearDiv": function(element) {
-                document.getElementById(element).innerHTML = "";
         },
 
         // Initiates a test description
@@ -227,10 +255,6 @@ window.Test = (function() {
                 document.getElementById('question3.3').addEventListener("click", Test.radioClick);
             } else if (test == 2.1) {
                 // Initialise test 2
-                Test.fullScore += Test.currentScore;
-                Test.currentScore = 0;
-                score.innerHTML = 'Current score: ' + Test.fullScore;
-
                 nextpage.style.display = 'none';
                  content.innerHTML = 
                     '<h2>Test 2</h2> \
@@ -249,24 +273,28 @@ window.Test = (function() {
                 document.getElementById('button4').addEventListener("click", Test.buttonClick);
             } else if (test == 3.1) {
                 // Initialise test 3
-                Test.fullScore += Test.currentScore;
-                Test.currentScore = 0;
-                score.innerHTML = 'Current score: ' + Test.fullScore;
             }
         },
 
         // Restarts a test
-        "reset": function(test) {
-            Test.clearDiv('content');
-
-            if (test == 1.1) {
-                test = 1.0;
+        "reset": function() {
+            if (Test.testLevel == 1.1 || Test.testLevel == 1.2 || Test.testLevel == 1.3 || Test.testLevel == 2.0) {
                 // Remove score from test 1 and re-initialise it
-                Test.currentScore = 0;
-            } else if (test == 2.1) {
-                test = 2.0;
+                console.log('Reseting test 1.');
+                Test.test1Score = 0;
+                Test.testLevel = 1.0;
+                Test.clickFunction();
+            } else if (Test.testLevel == 2.1 || Test.testLevel == 3.0) {
                 // Remove score from test 1 and re-initialise it
+                console.log('Reseting test 2.');
+                Test.test2Score = 0;
+                Test.testLevel = 2.0;
+                Test.clickFunction();
             }
+            // Make next page link visible and reload score
+            nextpage.style.display = 'inline-block';
+            score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                       Test.test4Score + Test.test5Score);
         }
     };
 
@@ -279,12 +307,13 @@ window.Test = (function() {
     nextpage.addEventListener("click", Test.clickFunction);
 
     // Set score to 0 at start
-    score.innerHTML = 'Current score: ' + Test.currentScore;
+    score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                           Test.test4Score + Test.test5Score);
 
     // Return public functions
     return {
-        "reset": function(test) {
-            Test.reset(test);
+        "reset": function() {
+            Test.reset();
         }
     };
 })();

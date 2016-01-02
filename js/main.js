@@ -150,7 +150,7 @@ window.Test = (function() {
                     '<h2>Test 1</h2> \
                     <p>Test 1 involves answering 3 questions.</p> \
                     <p>You will be given three choices for each question.</p> \
-                    <p>You only have one try per question, and each correct answer gives you 3 points.';
+                    <p>You only have one try per question, and each correct answer gives you 3 points.</p>';
             } else if (test == 2.0) {
                 // Initialise test 2 description
                     content.innerHTML = 
@@ -160,7 +160,13 @@ window.Test = (function() {
                     <p>every number divisible by 5 is replaced by the word "Buzz", and if divisible by 3 AND 5</p> \
                     <p>the number is replaced by the word "Fizz Buzz". \
                     <p><br>You will be shown a sequence and your goal is to choose the correct button to continue the sequence.</p> \
-                    <p>You only have one try, and this test gives you 3 points.';
+                    <p>You only have one try, and this test gives you 3 points.</p>';
+            } else if (test == 3.0) {
+                content.innerHTML = 
+                    '<h2>Test 3</h2> \
+                    <p>Test 3 is a memory test.</p> \
+                    <p>You will be shown 9 flags which will be hidden after 5 seconds.</p> \
+                    <p>Your goal is to click the correct flags in the order presented to you.</p>';
             }
         },
 
@@ -256,7 +262,7 @@ window.Test = (function() {
             } else if (test == 2.1) {
                 // Initialise test 2
                 nextpage.style.display = 'none';
-                 content.innerHTML = 
+                content.innerHTML = 
                     '<h2>Test 2</h2> \
                     <p>"1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, ..."</p> \
                     <div class="buttons"> \
@@ -273,6 +279,17 @@ window.Test = (function() {
                 document.getElementById('button4').addEventListener("click", Test.buttonClick);
             } else if (test == 3.1) {
                 // Initialise test 3
+                nextpage.style.display = 'none';
+                
+                // Create 9 divs in a 3x3 matrix
+                // Randomize their id from 1 to 9
+                // Apply a img file depending on each id
+                // Create a list from 1 to 9 and set requestedFlag to the current list item
+                // I.e. item 1 in the list is 'Sweden', requestedFlag = 1
+                // Add click event handlers for each
+                // The click event should check if this.id == requestedFlag
+                // If correct add a point, make the list item green, and highlight the next item, and requestedFlag++
+                // If wrong, make red, remove flags, show a big text, You clicked wrong!
             }
         },
 

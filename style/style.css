@@ -71,7 +71,7 @@ a:active {
 }
 
 .buttons {
-    top: 400px;
+    top: 300px;
     position: absolute;
     left: 50%;
     margin-right: -50%;
@@ -115,6 +115,11 @@ a:active {
 	height: 450px;
 	width: 800px;
 	border-radius: 30px;
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 #nextpage {
@@ -140,6 +145,159 @@ a:active {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
+}
+
+#flag1 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 80px;
+    left: 95px;
+    background: url('../img/china.png');
+    background-size: cover;
+}
+
+#flag2 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 80px;
+    left: 300px;
+    background: url('../img/finland.png');
+    background-size: cover;
+}
+
+#flag3 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 80px;
+    left: 505px;
+    background: url('../img/japan.png');
+    background-size: cover;
+}
+
+#flag4 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 205px;
+    left: 95px;
+    background: url('../img/norway.png');
+    background-size: contain;
+}
+
+#flag5 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 205px;
+    left: 300px;
+    background: url('../img/poland.png');
+    background-size: cover;
+}
+
+#flag6 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 205px;
+    left: 505px;
+    background: url('../img/south-korea.png') 6px;
+    background-size: contain;
+}
+
+#flag7 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 330px;
+    left: 95px;
+    background: url('../img/sweden.png');
+    background-size: cover;
+}
+
+#flag8 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 330px;
+    left: 300px;
+    background: url('../img/north-korea.png');
+    background-size: cover;
+}
+
+#flag9 {
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    top: 330px;
+    left: 505px;
+    background: url('../img/denmark.png');
+    background-size: contain;
+}
+
+#flagList1 {
+    position: absolute;
+    top: 450px;
+    left: 95px;
+}
+
+#flagList2 {
+    position: absolute;
+    top: 470px;
+    left: 95px;
+}
+
+#flagList3 {
+    position: absolute;
+    top: 490px;
+    left: 95px;
+}
+
+#flagList4 {
+    position: absolute;
+    top: 450px;
+    left: 300px;
+}
+
+#flagList5 {
+    position: absolute;
+    top: 470px;
+    left: 300px;
+}
+
+#flagList6 {
+    position: absolute;
+    top: 490px;
+    left: 300px;
+}
+
+#flagList7 {
+    position: absolute;
+    top: 450px;
+    left: 505px;
+}
+
+#flagList8 {
+    position: absolute;
+    top: 470px;
+    left: 505px;
+}
+
+#flagList9 {
+    position: absolute;
+    top: 490px;
+    left: 505px;
 }
 
 body {

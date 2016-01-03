@@ -48,6 +48,10 @@ window.Test = (function() {
                 console.log('Loading test 3 description.');
                 Test.initTestDesc(Test.testLevel);
                 Test.testLevel = 3.1;
+            } else if (Test.testLevel == 3.1) {
+                // Load test 3
+                Test.initTest(Test.testLevel);
+                Test.testLevel = 4.0;
             }
         },
 
@@ -280,11 +284,41 @@ window.Test = (function() {
             } else if (test == 3.1) {
                 // Initialise test 3
                 nextpage.style.display = 'none';
+                content.innerHTML = '<h2>Test 3</h2>';
+
+                // Resize test area to fit all 9 flags and the flag list
+                content.style.height = '600px';
+                content.style.top = '400px';
+                score.style.top = '660px';
+                nextpage.style.top = '640px';
+
+                // Shuffle flag numbers
+                var shuffle;
+                var flagArray = ['flag1', 'flag2', 'flag3', 'flag4', 'flag5', 'flag6', 'flag7', 'flag8', 'flag9'];
                 
-                // Create 9 divs in a 3x3 matrix
-                // Randomize their id from 1 to 9
-                // Apply a img file depending on each id
+                shuffle = function(o){ //http://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array-in-javascript
+                    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+                    return o;
+                    };
+
+                shuffle(flagArray);
+
+                // Create 9 flag divs in a 3x3 matrix
+                for (var i = 0; i < 9; i++) {
+                    content.innerHTML += '<div class="' + flagArray[i] + '" id="flag' + (i + 1) + '"></div>';
+                }
+                
                 // Create a list from 1 to 9 and set requestedFlag to the current list item
+                content.innerHTML += '<p id="flagList1">1. Finland</p>';
+                content.innerHTML += '<p id="flagList2">2. Sweden</p>';
+                content.innerHTML += '<p id="flagList3">3. Denmark</p>';
+                content.innerHTML += '<p id="flagList4">4. South Korea</p>';
+                content.innerHTML += '<p id="flagList5">5. North Korea</p>';
+                content.innerHTML += '<p id="flagList6">6. China</p>';
+                content.innerHTML += '<p id="flagList7">7. Poland</p>';
+                content.innerHTML += '<p id="flagList8">8. Japan</p>';
+                content.innerHTML += '<p id="flagList9">9. Norway</p>';
+
                 // I.e. item 1 in the list is 'Sweden', requestedFlag = 1
                 // Add click event handlers for each
                 // The click event should check if this.id == requestedFlag

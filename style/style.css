@@ -147,101 +147,83 @@ a:active {
     transform: translate(-50%, -50%)
 }
 
-#flag1 {
+.flag1 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 80px;
-    left: 95px;
     background: url('../img/china.png');
     background-size: cover;
 }
 
-#flag2 {
+.flag2 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 80px;
-    left: 300px;
     background: url('../img/finland.png');
     background-size: cover;
 }
 
-#flag3 {
+.flag3 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 80px;
-    left: 505px;
-    background: url('../img/japan.png');
+    background: url('../img/japan.png') 0;
     background-size: cover;
 }
 
-#flag4 {
+.flag4 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 205px;
-    left: 95px;
     background: url('../img/norway.png');
     background-size: contain;
 }
 
-#flag5 {
+.flag5 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 205px;
-    left: 300px;
     background: url('../img/poland.png');
     background-size: cover;
 }
 
-#flag6 {
+.flag6 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 205px;
-    left: 505px;
-    background: url('../img/south-korea.png') 6px;
+    background: url('../img/south-korea.png') 10px;
     background-size: contain;
 }
 
-#flag7 {
+.flag7 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 330px;
-    left: 95px;
     background: url('../img/sweden.png');
     background-size: cover;
 }
 
-#flag8 {
+.flag8 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 330px;
-    left: 300px;
     background: url('../img/north-korea.png');
     background-size: cover;
 }
 
-#flag9 {
+.flag9 {
     height: 120px;
     width: 200px;
     border: 1px solid black;
     position: absolute;
-    top: 330px;
-    left: 505px;
     background: url('../img/denmark.png');
     background-size: contain;
 }

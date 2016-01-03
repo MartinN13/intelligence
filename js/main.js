@@ -1,3 +1,4 @@
+/*jshint browser: true */
 /*jshint multistr: true */
 
 window.Test = (function() {
@@ -136,12 +137,12 @@ window.Test = (function() {
         // Handles button logic in test 2
         "buttonClick": function() {
             if (this.id == 'button4') {
-                content.innerHTML += "<h2 id='right'>You were right!<br>+3 points!</h2>";
+                content.innerHTML += "<h2 id='right'><br>You were right!<br>+3 points!</h2>";
                 Test.test2Score += 3;
                 score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
                                                        Test.test4Score + Test.test5Score);
             } else if (this.id == 'button2' || this.id == 'button3' || this.id == 'button4') {
-                content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                content.innerHTML += "<h2 id='wrong'><br>You were wrong!</h2>";
             }
             nextpage.style.display = 'inline-block';
         },
@@ -170,7 +171,8 @@ window.Test = (function() {
                     '<h2>Test 3</h2> \
                     <p>Test 3 is a memory test.</p> \
                     <p>You will be shown 9 flags which will be hidden after 5 seconds.</p> \
-                    <p>Your goal is to click the correct flags in the order presented to you.</p>';
+                    <p>Your goal is to click the correct flags in the order presented to you.</p> \
+                    <p>Click on next page to start the test';
             }
         },
 
@@ -302,28 +304,101 @@ window.Test = (function() {
                     };
 
                 shuffle(flagArray);
-
                 // Create 9 flag divs in a 3x3 matrix
                 for (var i = 0; i < 9; i++) {
                     content.innerHTML += '<div class="' + flagArray[i] + '" id="flag' + (i + 1) + '"></div>';
                 }
                 
-                // Create a list from 1 to 9 and set requestedFlag to the current list item
-                content.innerHTML += '<p id="flagList1">1. Finland</p>';
-                content.innerHTML += '<p id="flagList2">2. Sweden</p>';
-                content.innerHTML += '<p id="flagList3">3. Denmark</p>';
-                content.innerHTML += '<p id="flagList4">4. South Korea</p>';
-                content.innerHTML += '<p id="flagList5">5. North Korea</p>';
-                content.innerHTML += '<p id="flagList6">6. China</p>';
-                content.innerHTML += '<p id="flagList7">7. Poland</p>';
-                content.innerHTML += '<p id="flagList8">8. Japan</p>';
-                content.innerHTML += '<p id="flagList9">9. Norway</p>';
+                // Position flags, as we don't know their position before shuffling
+                document.getElementById('flag1').style.top = '80px';
+                document.getElementById('flag1').style.left = '95px';
+                document.getElementById('flag2').style.top = '80px';
+                document.getElementById('flag2').style.left = '300px';
+                document.getElementById('flag3').style.top = '80px';
+                document.getElementById('flag3').style.left = '505px';
+                document.getElementById('flag4').style.top = '205px';
+                document.getElementById('flag4').style.left = '95px';
+                document.getElementById('flag5').style.top = '205px';
+                document.getElementById('flag5').style.left = '300px';
+                document.getElementById('flag6').style.top = '205px';
+                document.getElementById('flag6').style.left = '505px';
+                document.getElementById('flag7').style.top = '330px';
+                document.getElementById('flag7').style.left = '95px';
+                document.getElementById('flag8').style.top = '330px';
+                document.getElementById('flag8').style.left = '300px';
+                document.getElementById('flag9').style.top = '330px';
+                document.getElementById('flag9').style.left = '505px';
 
-                // I.e. item 1 in the list is 'Sweden', requestedFlag = 1
-                // Add click event handlers for each
-                // The click event should check if this.id == requestedFlag
-                // If correct add a point, make the list item green, and highlight the next item, and requestedFlag++
-                // If wrong, make red, remove flags, show a big text, You clicked wrong!
+                var currentFlag = 1;
+
+                var flagCheck = function() {
+                    if ('flag' + currentFlag == this.className) {
+                        // Make flag visible and mark list item green
+                        this.style.background = '';
+                        document.getElementById('flagList' + currentFlag).style.fontWeight = '';
+                        document.getElementById('flagList' + currentFlag).style.color = 'green';
+                        document.getElementById('flagList' + currentFlag).innerHTML += ' +1';
+                        currentFlag++;
+
+                        Test.test3Score += 1;
+                        score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                               Test.test4Score + Test.test5Score);
+                        if (currentFlag < 10) {
+                            // Make next list item bold
+                            document.getElementById('flagList' + currentFlag).style.fontWeight = 'bold';
+                        } else {
+                            // If all 9 flags are clicked, add next page link
+                            nextpage.style.display = 'inline-block';
+                        }
+                        // Remove click event from flag
+                        this.removeEventListener("click", flagCheck);
+                    } else {
+                        // Resize content window back into normal and give game over message
+                        content.style.height = '';
+                        content.style.top = '';
+                        score.style.top = '';
+                        nextpage.style.top = '';
+                        content.innerHTML = '<h2>Test 3</h2> \
+                                            <h2 id="wrong">You were wrong!<br>Game over</h2>';
+                        nextpage.style.display = 'inline-block';
+                    }
+                };
+
+                setTimeout(function(){
+                    // Remove cover and hide flags after 5 seconds
+                    document.getElementById('flag1').style.background = 'none';
+                    document.getElementById('flag2').style.background = 'none';
+                    document.getElementById('flag3').style.background = 'none';
+                    document.getElementById('flag4').style.background = 'none';
+                    document.getElementById('flag5').style.background = 'none';
+                    document.getElementById('flag6').style.background = 'none';
+                    document.getElementById('flag7').style.background = 'none';
+                    document.getElementById('flag8').style.background = 'none';
+                    document.getElementById('flag9').style.background = 'none';
+
+                    // Create a list from flag 1 to 9 and make first entry bold
+                    content.innerHTML += '<p id="flagList1">1. China</p>';
+                    content.innerHTML += '<p id="flagList2">2. Finland</p>';
+                    content.innerHTML += '<p id="flagList3">3. Japan</p>';
+                    content.innerHTML += '<p id="flagList4">4. Norway</p>';
+                    content.innerHTML += '<p id="flagList5">5. Poland</p>';
+                    content.innerHTML += '<p id="flagList6">6. South Korea</p>';
+                    content.innerHTML += '<p id="flagList7">7. Sweden</p>';
+                    content.innerHTML += '<p id="flagList8">8. North Korea</p>';
+                    content.innerHTML += '<p id="flagList9">9. Denmark</p>';
+                    document.getElementById('flagList1').style.fontWeight = 'bold';
+                }, 5000);
+                setTimeout(function(){
+                    document.getElementById('flag1').addEventListener("click", flagCheck);
+                    document.getElementById('flag2').addEventListener("click", flagCheck);
+                    document.getElementById('flag3').addEventListener("click", flagCheck);
+                    document.getElementById('flag4').addEventListener("click", flagCheck);
+                    document.getElementById('flag5').addEventListener("click", flagCheck);
+                    document.getElementById('flag6').addEventListener("click", flagCheck);
+                    document.getElementById('flag7').addEventListener("click", flagCheck);
+                    document.getElementById('flag8').addEventListener("click", flagCheck);
+                    document.getElementById('flag9').addEventListener("click", flagCheck);
+                }, 5000);
             }
         },
 
@@ -336,16 +411,22 @@ window.Test = (function() {
                 Test.testLevel = 1.0;
                 Test.clickFunction();
             } else if (Test.testLevel == 2.1 || Test.testLevel == 3.0) {
-                // Remove score from test 1 and re-initialise it
+                // Remove score from test 2 and re-initialise it
                 console.log('Reseting test 2.');
                 Test.test2Score = 0;
                 Test.testLevel = 2.0;
+                Test.clickFunction();
+            } else if (Test.testLevel == 3.1　|| Test.testLevel == 4.0) {
+                // Remove score from test 2 and re-initialise it
+                console.log('Reseting test 3.');
+                Test.test3Score = 0;
+                Test.testLevel = 3.0;
                 Test.clickFunction();
             }
             // Make next page link visible and reload score
             nextpage.style.display = 'inline-block';
             score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
-                                                       Test.test4Score + Test.test5Score);
+                                                   Test.test4Score + Test.test5Score);
         }
     };
 

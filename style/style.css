@@ -107,6 +107,36 @@ a:active {
     text-decoration: none;
 }
 
+.object {
+    position: absolute;
+    display: inline-block;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.triangle {
+    border-style: solid;
+    border-width: 0 50px 100px 50px;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
 #content {
 	border: 1px solid black;
 	background: url('../img/cream_dust.png') repeat 0 0;
@@ -228,58 +258,72 @@ a:active {
     background-size: contain;
 }
 
-#flagList1 {
+#list1 {
     position: absolute;
     top: 450px;
     left: 95px;
 }
 
-#flagList2 {
+#list2 {
     position: absolute;
     top: 470px;
     left: 95px;
 }
 
-#flagList3 {
+#list3 {
     position: absolute;
     top: 490px;
     left: 95px;
 }
 
-#flagList4 {
+#list4 {
     position: absolute;
     top: 450px;
     left: 300px;
 }
 
-#flagList5 {
+#list5 {
     position: absolute;
     top: 470px;
     left: 300px;
 }
 
-#flagList6 {
+#list6 {
     position: absolute;
     top: 490px;
     left: 300px;
 }
 
-#flagList7 {
+#list7 {
     position: absolute;
     top: 450px;
     left: 505px;
 }
 
-#flagList8 {
+#list8 {
     position: absolute;
     top: 470px;
     left: 505px;
 }
 
-#flagList9 {
+#list9 {
     position: absolute;
     top: 490px;
     left: 505px;
+}
+
+#list10 {
+    position: absolute;
+    top: 510px;
+    left: 496px;
+}
+
+#timer {
+    position: absolute;
+    display: inline-block;
+    font-size: 36px;
+    top: 460px;
+    left: 720px;
 }
 
 body {

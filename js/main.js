@@ -45,14 +45,25 @@ window.Test = (function() {
                 Test.initTest(Test.testLevel);
                 Test.testLevel = 3.0;
             } else if (Test.testLevel == 3.0) {
-                // Load test 3 description.
+                // Load test 3 description
                 console.log('Loading test 3 description.');
                 Test.initTestDesc(Test.testLevel);
                 Test.testLevel = 3.1;
             } else if (Test.testLevel == 3.1) {
                 // Load test 3
+                console.log('Loading test 3.');
                 Test.initTest(Test.testLevel);
                 Test.testLevel = 4.0;
+            } else if (Test.testLevel == 4.0) {
+                // Load test 4 description
+                console.log('Loading test 4 description.');
+                Test.initTestDesc(Test.testLevel);
+                Test.testLevel = 4.1;
+            } else if (Test.testLevel == 4.1) {
+                // Load test 4
+                console.log('Loading test 4.');
+                Test.initTest(Test.testLevel);
+                Test.testLevel = 5.0;
             }
         },
 
@@ -167,12 +178,23 @@ window.Test = (function() {
                     <p><br>You will be shown a sequence and your goal is to choose the correct button to continue the sequence.</p> \
                     <p>You only have one try, and this test gives you 3 points.</p>';
             } else if (test == 3.0) {
+                // Initialise test 3 description
                 content.innerHTML = 
                     '<h2>Test 3</h2> \
                     <p>Test 3 is a memory test.</p> \
                     <p>You will be shown 9 flags which will be hidden after 5 seconds.</p> \
-                    <p>Your goal is to click the correct flags in the order presented to you.</p> \
-                    <p>Click on next page to start the test';
+                    <p>Your goal is to memorise the flags position and click the correct flags in the order presented to you.</p> \
+                    <p>Click on next page to start the test.</p>';
+            } else if (test == 4.0) {
+                // Initialise test 4 description
+                content.innerHTML = 
+                    '<h2>Test 4</h2> \
+                    <p>Test 4 is a test of your reading comprehension and visual acuity.</p> \
+                    <p>10 different objects will be drawn out.</p> \
+                    <p>Your goal is to click the correct objects in the order presented to you.</p> \
+                    <p>If you click the wrong object the test moves on to the next one on the list.</p> \
+                    <p><br>You have to finish the test in 15 seconds.</p> \
+                    <p>Click on next page to start the test.</p>';
             }
         },
 
@@ -302,8 +324,8 @@ window.Test = (function() {
                     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
                     return o;
                     };
-
                 shuffle(flagArray);
+
                 // Create 9 flag divs in a 3x3 matrix
                 for (var i = 0; i < 9; i++) {
                     content.innerHTML += '<div class="' + flagArray[i] + '" id="flag' + (i + 1) + '"></div>';
@@ -335,9 +357,9 @@ window.Test = (function() {
                     if ('flag' + currentFlag == this.className) {
                         // Make flag visible and mark list item green
                         this.style.background = '';
-                        document.getElementById('flagList' + currentFlag).style.fontWeight = '';
-                        document.getElementById('flagList' + currentFlag).style.color = 'green';
-                        document.getElementById('flagList' + currentFlag).innerHTML += ' +1';
+                        document.getElementById('list' + currentFlag).style.fontWeight = '';
+                        document.getElementById('list' + currentFlag).style.color = 'green';
+                        document.getElementById('list' + currentFlag).innerHTML += ' +1';
                         currentFlag++;
 
                         Test.test3Score += 1;
@@ -345,7 +367,7 @@ window.Test = (function() {
                                                                Test.test4Score + Test.test5Score);
                         if (currentFlag < 10) {
                             // Make next list item bold
-                            document.getElementById('flagList' + currentFlag).style.fontWeight = 'bold';
+                            document.getElementById('list' + currentFlag).style.fontWeight = 'bold';
                         } else {
                             // If all 9 flags are clicked, add next page link
                             nextpage.style.display = 'inline-block';
@@ -359,12 +381,13 @@ window.Test = (function() {
                         score.style.top = '';
                         nextpage.style.top = '';
                         content.innerHTML = '<h2>Test 3</h2> \
-                                            <h2 id="wrong">You were wrong!<br>Game over</h2>';
+                                            <h2 id="wrong">You were wrong!<br>Game over</h2> \
+                                            <h2>You got ' + Test.test3Score + ' flags right!</h2>';
                         nextpage.style.display = 'inline-block';
                     }
                 };
 
-                setTimeout(function(){
+                setTimeout(function() {
                     // Remove cover and hide flags after 5 seconds
                     document.getElementById('flag1').style.background = 'none';
                     document.getElementById('flag2').style.background = 'none';
@@ -377,18 +400,20 @@ window.Test = (function() {
                     document.getElementById('flag9').style.background = 'none';
 
                     // Create a list from flag 1 to 9 and make first entry bold
-                    content.innerHTML += '<p id="flagList1">1. China</p>';
-                    content.innerHTML += '<p id="flagList2">2. Finland</p>';
-                    content.innerHTML += '<p id="flagList3">3. Japan</p>';
-                    content.innerHTML += '<p id="flagList4">4. Norway</p>';
-                    content.innerHTML += '<p id="flagList5">5. Poland</p>';
-                    content.innerHTML += '<p id="flagList6">6. South Korea</p>';
-                    content.innerHTML += '<p id="flagList7">7. Sweden</p>';
-                    content.innerHTML += '<p id="flagList8">8. North Korea</p>';
-                    content.innerHTML += '<p id="flagList9">9. Denmark</p>';
-                    document.getElementById('flagList1').style.fontWeight = 'bold';
+                    content.innerHTML += '<p id="list1">1. China</p>';
+                    content.innerHTML += '<p id="list2">2. Finland</p>';
+                    content.innerHTML += '<p id="list3">3. Japan</p>';
+                    content.innerHTML += '<p id="list4">4. Norway</p>';
+                    content.innerHTML += '<p id="list5">5. Poland</p>';
+                    content.innerHTML += '<p id="list6">6. South Korea</p>';
+                    content.innerHTML += '<p id="list7">7. Sweden</p>';
+                    content.innerHTML += '<p id="list8">8. North Korea</p>';
+                    content.innerHTML += '<p id="list9">9. Denmark</p>';
+                    document.getElementById('list1').style.fontWeight = 'bold';
                 }, 5000);
-                setTimeout(function(){
+
+                setTimeout(function() {
+                    // Add event listeners after all flags are white
                     document.getElementById('flag1').addEventListener("click", flagCheck);
                     document.getElementById('flag2').addEventListener("click", flagCheck);
                     document.getElementById('flag3').addEventListener("click", flagCheck);
@@ -399,6 +424,133 @@ window.Test = (function() {
                     document.getElementById('flag8').addEventListener("click", flagCheck);
                     document.getElementById('flag9').addEventListener("click", flagCheck);
                 }, 5000);
+            } else if (test == 4.1) {
+                nextpage.style.display = 'none';
+                content.innerHTML = '';
+
+                // Resize test area to better fit objects
+                content.style.height = '600px';
+                content.style.top = '400px';
+                score.style.top = '660px';
+                nextpage.style.top = '640px';
+
+                // Gives an object random attributes
+                var randomAttributes = function(element, count) {
+                    // Add 'object' class
+                    element.className += 'object';
+
+                    // Define colours and shapes
+                    var colors = [' green', ' blue', ' red', ' blue', ' green', ' red', ' yellow', ' red', ' blue', ' green'];
+                    var shapes = [' square', ' circle', ' triangle', ' triangle', ' circle', 
+                                  ' square', ' square', ' circle', ' square', ' triangle'];
+
+                    // Set a shape
+                    element.className += shapes[count];
+
+                    // Set a size
+                    if (shapes[count] != ' triangle') {
+                        element.className += colors[count];
+                        element.style.height = '100px';
+                        element.style.width = '100px';
+                    } else {
+                        element.style.height = '0px';
+                        element.style.width = '0px';
+                        element.style.borderColor = 'transparent transparent ' + colors[count] + ' transparent';
+                    }
+
+                    // Set a position
+                    var newHeight = Math.floor((Math.random() * 350) + 1),
+                        newWidth = Math.floor((Math.random() * 650) + 1);
+                
+                    element.style.top = newHeight + 'px';
+                    element.style.left = newWidth + 'px';
+                };
+
+                var currentObject = 1;
+
+                var objectCheck = function() {
+                    if ('object' + currentObject == this.id) {
+                        document.getElementById('list' + currentObject).style.fontWeight = '';
+                        document.getElementById('list' + currentObject).style.color = 'green';
+                        document.getElementById('list' + currentObject).innerHTML += ' +1';
+                        currentObject++;
+
+                        Test.test4Score += 1;
+                        score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                               Test.test4Score + Test.test5Score);
+                    } else {
+                        document.getElementById('list' + currentObject).style.fontWeight = '';
+                        document.getElementById('list' + currentObject).style.color = 'red';
+                        document.getElementById('list' + currentObject).innerHTML += ' 0';
+                        currentObject++;
+                    }
+
+                    if (currentObject < 11) {
+                        // Make next list item bold
+                        document.getElementById('list' + currentObject).style.fontWeight = 'bold';
+                    } else {
+                        // If all 10 object are clicked, add next page link and remove countdown
+                        nextpage.style.display = 'inline-block';
+                    }
+                };
+
+                // Give each object its attributes and an event handler
+                for (var i2 = 1; i2 < 11; i2++) {
+                    content.innerHTML += '<div id="object' + i2 + '"></div>';
+                    randomAttributes(document.getElementById('object' + i2), (i2 - 1));
+                }
+
+                // Create the list of instructions
+                content.innerHTML += '<p id="list1">1. The green square</p>';
+                content.innerHTML += '<p id="list2">2. The blue circle</p>';
+                content.innerHTML += '<p id="list3">3. The red triangle</p>';
+                content.innerHTML += '<p id="list4">4. The blue triangle</p>';
+                content.innerHTML += '<p id="list5">5. The green circle</p>';
+                content.innerHTML += '<p id="list6">6. The red square</p>';
+                content.innerHTML += '<p id="list7">7. The yellow square</p>';
+                content.innerHTML += '<p id="list8">8. The red circle</p>';
+                content.innerHTML += '<p id="list9">9. The blue square</p>';
+                content.innerHTML += '<p id="list10">10. The green triangle</p>';
+                document.getElementById('list1').style.fontWeight = 'bold';
+
+                var seconds = 15;
+                content.innerHTML += '<p id="timer">' + seconds + '</p>';
+
+                var timer = setInterval(function() {
+                    if (currentObject == 11) {
+                        clearInterval(timer);
+                    } else {
+                        seconds--;
+    
+                        if (seconds < 0) {
+                            // Resize content window back into normal and give game over message
+                            content.style.height = '';
+                            content.style.top = '';
+                            score.style.top = '';
+                            nextpage.style.top = '';
+                            content.innerHTML = '<h2>Test 4</h2> \
+                                                <h2 id="wrong">Time is up!<br>Game over</h2> \
+                                                <h2>You got ' + Test.test4Score + ' objects right!</h2>';
+                            nextpage.style.display = 'inline-block';
+                        } else if (seconds < 5) {
+                            document.getElementById('timer').style.color = 'red';
+                            document.getElementById('timer').innerHTML = seconds;
+                        } else {
+                            document.getElementById('timer').innerHTML = seconds;
+                        }
+                    }
+                }, 1000);
+
+                document.getElementById('object1').addEventListener("click", objectCheck);
+                document.getElementById('object2').addEventListener("click", objectCheck);
+                document.getElementById('object3').addEventListener("click", objectCheck);
+                document.getElementById('object4').addEventListener("click", objectCheck);
+                document.getElementById('object5').addEventListener("click", objectCheck);
+                document.getElementById('object6').addEventListener("click", objectCheck);
+                document.getElementById('object7').addEventListener("click", objectCheck);
+                document.getElementById('object8').addEventListener("click", objectCheck);
+                document.getElementById('object9').addEventListener("click", objectCheck);
+                document.getElementById('object10').addEventListener("click", objectCheck);
             }
         },
 
@@ -417,10 +569,16 @@ window.Test = (function() {
                 Test.testLevel = 2.0;
                 Test.clickFunction();
             } else if (Test.testLevel == 3.1　|| Test.testLevel == 4.0) {
-                // Remove score from test 2 and re-initialise it
+                // Remove score from test 3 and re-initialise it
                 console.log('Reseting test 3.');
                 Test.test3Score = 0;
                 Test.testLevel = 3.0;
+                Test.clickFunction();
+            }　else if (Test.testLevel == 4.1　|| Test.testLevel == 5.0) {
+                // Remove score from test 4 and re-initialise it
+                console.log('Reseting test 4.');
+                Test.test4Score = 0;
+                Test.testLevel = 4.0;
                 Test.clickFunction();
             }
             // Make next page link visible and reload score

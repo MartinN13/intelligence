@@ -64,6 +64,16 @@ window.Test = (function() {
                 console.log('Loading test 4.');
                 Test.initTest(Test.testLevel);
                 Test.testLevel = 5.0;
+            } else if (Test.testLevel == 5.0) {
+                // Load test 5 description
+                console.log('Loading test 5 description.');
+                Test.initTestDesc(Test.testLevel);
+                Test.testLevel = 5.1;
+            } else if (Test.testLevel == 5.1) {
+                // Load test 5
+                console.log('Loading test 5');
+                Test.initTest(Test.testLevel);
+                Test.testLevel = 6.0;
             }
         },
 
@@ -81,7 +91,7 @@ window.Test = (function() {
                                                            Test.test4Score + Test.test5Score);
                 } else {
                     // Show wrong answer text
-                    content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                    content.innerHTML += "<h2 id='wrong'>You were wrong!<br>0 points!</h2>";
                     if (this.id == 'question1.2') {
                         // Disable 1.1 and 1.3
                         document.getElementById('question1.1').disabled = true;
@@ -107,7 +117,7 @@ window.Test = (function() {
                     score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
                                                            Test.test4Score + Test.test5Score);
                 } else {
-                    content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                    content.innerHTML += "<h2 id='wrong'>You were wrong!<br>0 points!</h2>";
                     if (this.id == 'question2.2') {
                         document.getElementById('question2.1').disabled = true;
                         document.getElementById('question2.2').checked = true;
@@ -130,7 +140,7 @@ window.Test = (function() {
                     score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
                                                            Test.test4Score + Test.test5Score);
                 } else {
-                    content.innerHTML += "<h2 id='wrong'>You were wrong!</h2>";
+                    content.innerHTML += "<h2 id='wrong'>You were wrong!<br>0 points!</h2>";
                     if (this.id == 'question3.2') {
                         document.getElementById('question3.1').disabled = true;
                         document.getElementById('question3.2').checked = true;
@@ -153,7 +163,7 @@ window.Test = (function() {
                 score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
                                                        Test.test4Score + Test.test5Score);
             } else if (this.id == 'button2' || this.id == 'button3' || this.id == 'button4') {
-                content.innerHTML += "<h2 id='wrong'><br>You were wrong!</h2>";
+                content.innerHTML += "<h2 id='wrong'><br>You were wrong!<br>0 points!</h2>";
             }
             nextpage.style.display = 'inline-block';
         },
@@ -195,11 +205,55 @@ window.Test = (function() {
                     <p>If you click the wrong object the test moves on to the next one on the list.</p> \
                     <p><br>You have to finish the test in 15 seconds.</p> \
                     <p>Click on next page to start the test.</p>';
+            } else if (test == 5.0) {
+                // Initialise test 5 description
+                content.innerHTML = 
+                    '<h2>Test 5</h2> \
+                    <p>Test 5 is another test of your reading comprehension and visual acuity.</p> \
+                    <p>10 different objects will be shown for one second, with a one second pause in between.</p> \
+                    <p><br><br>Your goal is to click on any object that:</p> \
+                    <p>1. Is not red.</p> \
+                    <p>2. Is not a square.</p> \
+                    <p>3. Is red and a square.</p> \
+                    <p><br><br>Click on next page to start the test.</p>';
             }
         },
 
         // Initialises a test
         "initTest": function(test) {
+            // Gives an object random attributes
+            var randomAttributes = function(element, count, test) {
+                // Add 'object' class
+                element.className += 'object';
+                // Define colours and shapes
+                var colors = [' green', ' blue', ' red', ' blue', ' green', ' red', ' yellow', ' red', ' blue', ' green'];
+                var shapes = [' square', ' circle', ' triangle', ' triangle', ' circle', 
+                              ' square', ' square', ' circle', ' square', ' triangle'];
+                // Set a shape
+                element.className += shapes[count];
+                // Set a size
+                if (shapes[count] != ' triangle') {
+                    element.className += colors[count];
+                    element.style.height = '100px';
+                    element.style.width = '100px';
+                } else {
+                    element.style.height = '0px';
+                    element.style.width = '0px';
+                    element.style.borderColor = 'transparent transparent ' + colors[count];
+                }
+                // If test 4 set a random position, else a fixed one
+                if (test == 4) {
+                    var newHeight = Math.floor((Math.random() * 350) + 1),
+                        newWidth = Math.floor((Math.random() * 650) + 1);
+                
+                    element.style.top = newHeight + 'px';
+                    element.style.left = newWidth + 'px';
+                } else if (test == 5) {
+                    element.style.top = '200px';
+                    element.style.left = '350px';
+                }
+            };
+
             if (test == 1.1) {
                 // Initialise test 1.1
                 nextpage.style.display = 'none';
@@ -381,8 +435,12 @@ window.Test = (function() {
                         score.style.top = '';
                         nextpage.style.top = '';
                         content.innerHTML = '<h2>Test 3</h2> \
-                                            <h2 id="wrong">You were wrong!<br>Game over</h2> \
-                                            <h2>You got ' + Test.test3Score + ' flags right!</h2>';
+                                            <h2 id="wrong">You were wrong!<br>Game over</h2>';
+                        if (Test.test3Score == 1) {
+                            content.innerHTML += '<h2>You got ' + Test.test3Score + ' flag right!</h2>';
+                        } else {
+                            content.innerHTML += '<h2>You got ' + Test.test3Score + ' flags right!</h2>';
+                        }
                         nextpage.style.display = 'inline-block';
                     }
                 };
@@ -434,38 +492,6 @@ window.Test = (function() {
                 score.style.top = '660px';
                 nextpage.style.top = '640px';
 
-                // Gives an object random attributes
-                var randomAttributes = function(element, count) {
-                    // Add 'object' class
-                    element.className += 'object';
-
-                    // Define colours and shapes
-                    var colors = [' green', ' blue', ' red', ' blue', ' green', ' red', ' yellow', ' red', ' blue', ' green'];
-                    var shapes = [' square', ' circle', ' triangle', ' triangle', ' circle', 
-                                  ' square', ' square', ' circle', ' square', ' triangle'];
-
-                    // Set a shape
-                    element.className += shapes[count];
-
-                    // Set a size
-                    if (shapes[count] != ' triangle') {
-                        element.className += colors[count];
-                        element.style.height = '100px';
-                        element.style.width = '100px';
-                    } else {
-                        element.style.height = '0px';
-                        element.style.width = '0px';
-                        element.style.borderColor = 'transparent transparent ' + colors[count] + ' transparent';
-                    }
-
-                    // Set a position
-                    var newHeight = Math.floor((Math.random() * 350) + 1),
-                        newWidth = Math.floor((Math.random() * 650) + 1);
-                
-                    element.style.top = newHeight + 'px';
-                    element.style.left = newWidth + 'px';
-                };
-
                 var currentObject = 1;
 
                 var objectCheck = function() {
@@ -494,10 +520,10 @@ window.Test = (function() {
                     }
                 };
 
-                // Give each object its attributes and an event handler
+                // Give each object its attributes
                 for (var i2 = 1; i2 < 11; i2++) {
                     content.innerHTML += '<div id="object' + i2 + '"></div>';
-                    randomAttributes(document.getElementById('object' + i2), (i2 - 1));
+                    randomAttributes(document.getElementById('object' + i2), (i2 - 1), 4);
                 }
 
                 // Create the list of instructions
@@ -523,15 +549,15 @@ window.Test = (function() {
                         seconds--;
     
                         if (seconds < 0) {
-                            // Resize content window back into normal and give game over message
-                            content.style.height = '';
-                            content.style.top = '';
-                            score.style.top = '';
-                            nextpage.style.top = '';
                             content.innerHTML = '<h2>Test 4</h2> \
-                                                <h2 id="wrong">Time is up!<br>Game over</h2> \
-                                                <h2>You got ' + Test.test4Score + ' objects right!</h2>';
+                                                <h2 id="wrong">Time is up!<br>Game over</h2>';
+                            if (Test.test4Score == 1) {
+                                content.innerHTML += '<h2>You got ' + Test.test4Score + ' object right!</h2>';
+                            } else {
+                                content.innerHTML += '<h2>You got ' + Test.test4Score + ' objects right!</h2>';
+                            }
                             nextpage.style.display = 'inline-block';
+                            clearInterval(timer);
                         } else if (seconds < 5) {
                             document.getElementById('timer').style.color = 'red';
                             document.getElementById('timer').innerHTML = seconds;
@@ -551,6 +577,68 @@ window.Test = (function() {
                 document.getElementById('object8').addEventListener("click", objectCheck);
                 document.getElementById('object9').addEventListener("click", objectCheck);
                 document.getElementById('object10').addEventListener("click", objectCheck);
+            } else if (test == 5.1) {
+                nextpage.style.display = 'none';
+                content.innerHTML = '<h2>Test 4</h2> \
+                                    <p><br><br>Click on any object that: </p> \
+                                    <p>1. Is not red.</p> \
+                                    <p>2. Is not a square.</p> \
+                                    <p>3. Is red and a square.</p>';
+                var counter = 0;
+                var objectCount = 1;
+                var clickCount = 1;
+
+                // Checks if an elements classname matches red or square
+                var objectCheck2 = function() {
+                    var wrong;
+                    console.log(this.style.borderColor);
+
+                    if ( this.className.match(/(?:^|\s)red(?!\S)/) && this.className.match(/(?:^|\s)square(?!\S)/) ) {
+                        wrong = 0;
+                    } else if ( this.className.match(/(?:^|\s)red(?!\S)/) || this.className.match(/(?:^|\s)square(?!\S)/) ){
+                        wrong = 1;
+                        content.innerHTML += '<p id="list' + clickCount + '">Wrong! 0</p>';
+                        document.getElementById('list' + clickCount).style.color = 'red';
+                    } else if (this.style.borderColor == 'transparent transparent red') {
+                        wrong = 1;
+                        content.innerHTML += '<p id="list' + clickCount + '">Wrong! 0</p>';
+                        document.getElementById('list' + clickCount).style.color = 'red';
+                    } else {
+                        wrong = 0;
+                    }
+
+                    if (wrong === 0) {
+                        content.innerHTML += '<p id="list' + clickCount + '">Correct! +1</p>';
+                        document.getElementById('list' + clickCount).style.color = 'green';
+                        Test.test5Score += 1;
+                        score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                               Test.test4Score + Test.test5Score);
+                    }
+                    clickCount++;
+                };
+
+                // Give each object its attributes
+                var timer2 = setInterval(function() {
+                    if (counter == 20) {
+                        content.innerHTML = '<h2 id=>Test 5</h2> \
+                                            <h2 id="wrong">Time is up!<br>Game over</h2>';
+                        if (Test.test5Score == 1) {
+                            content.innerHTML += '<h2>You got ' + Test.test5Score + ' objects right!</h2>';
+                        } else {
+                            content.innerHTML += '<h2>You got ' + Test.test5Score + ' objects right!</h2>';
+                        }
+                        nextpage.style.display = 'inline-block';
+                        clearInterval(timer2);
+                    } else if (counter % 2 === 0) {
+                        content.innerHTML += '<div id="object' + objectCount + '"></div>';
+                        randomAttributes(document.getElementById('object' + objectCount), (objectCount - 1), 5);
+                        document.getElementById('object' + objectCount).addEventListener("click", objectCheck2);
+                        objectCount++;
+                    } else if (counter % 2 !== 0) {
+                        content.removeChild(document.getElementById('object' + (objectCount - 1)));
+                    }
+                    counter++;
+                }, 1000);
             }
         },
 

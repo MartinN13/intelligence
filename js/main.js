@@ -71,9 +71,13 @@ window.Test = (function() {
                 Test.testLevel = 5.1;
             } else if (Test.testLevel == 5.1) {
                 // Load test 5
-                console.log('Loading test 5');
+                console.log('Loading test 5.');
                 Test.initTest(Test.testLevel);
                 Test.testLevel = 6.0;
+            } else if (Test.testLevel == 6.0) {
+                // Load results page
+                console.log('Loading results.');
+                Test.initTestDesc(Test.testLevel);
             }
         },
 
@@ -202,7 +206,7 @@ window.Test = (function() {
                     <p>Test 4 is a test of your reading comprehension and visual acuity.</p> \
                     <p>10 different objects will be drawn out.</p> \
                     <p>Your goal is to click the correct objects in the order presented to you.</p> \
-                    <p>If you click the wrong object the test moves on to the next one on the list.</p> \
+                    <p>If you click the wrong object you lose 1 point and the test moves on to the next object on the list.</p> \
                     <p><br>You have to finish the test in 15 seconds.</p> \
                     <p>Click on next page to start the test.</p>';
             } else if (test == 5.0) {
@@ -211,11 +215,41 @@ window.Test = (function() {
                     '<h2>Test 5</h2> \
                     <p>Test 5 is another test of your reading comprehension and visual acuity.</p> \
                     <p>10 different objects will be shown for one second, with a one second pause in between.</p> \
+                    <p>A correct click gets you 1 point, while a mistake loses you 2 points, so be careful!</p> \
                     <p><br><br>Your goal is to click on any object that:</p> \
                     <p>1. Is not red.</p> \
                     <p>2. Is not a square.</p> \
                     <p>3. Is red and a square.</p> \
                     <p><br><br>Click on next page to start the test.</p>';
+            } else if (test == 6.0) {
+                // Initialise resluts page
+
+                var result = Math.floor((Test.test1Score + Test.test2Score + Test.test3Score + 
+                              Test.test4Score + Test.test5Score) / 36 * 100);
+                content.innerHTML = 
+                    '<h2>Results</h2> \
+                    <p>Congratulations! You have finished the test.</p> \
+                    <p><br>Here is your score for each test: </p> \
+                    <p>Test 1: ' + Test.test1Score + ' out of 9 points</p> \
+                    <p>Test 2: ' + Test.test2Score + ' out of 3 points</p> \
+                    <p>Test 3: ' + Test.test3Score + ' out of 9 points</p> \
+                    <p>Test 4: ' + Test.test4Score + ' out of 10 points</p> \
+                    <p>Test 5: ' + Test.test5Score + ' out of 5 points</p> \
+                    <p><br>Total: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                       Test.test4Score + Test.test5Score) + ' out of 36 points</p> \
+                    <p><br>This gives you a score of ' + result + '%, which means you are:</p>';
+
+                    if (result < 5) {
+                        content.innerHTML += '<h2>A (little) bit stupid!</h>';
+                    } else if (result < 10) {
+                        content.innerHTML += '<h2>Below average!</h>';
+                    } else if (result < 20) {
+                        content.innerHTML += '<h2>Average!</h>';
+                    } else if (result < 30) {
+                        content.innerHTML += '<h2>Very smart!</h>';
+                    } else {
+                        content.innerHTML += '<h2>A genius!</h>';
+                    }
             }
         },
 
@@ -507,8 +541,12 @@ window.Test = (function() {
                     } else {
                         document.getElementById('list' + currentObject).style.fontWeight = '';
                         document.getElementById('list' + currentObject).style.color = 'red';
-                        document.getElementById('list' + currentObject).innerHTML += ' 0';
+                        document.getElementById('list' + currentObject).innerHTML += ' -1';
                         currentObject++;
+
+                        Test.test4Score -= 1;
+                        score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                               Test.test4Score + Test.test5Score);
                     }
 
                     if (currentObject < 11) {
@@ -597,12 +635,8 @@ window.Test = (function() {
                         wrong = 0;
                     } else if ( this.className.match(/(?:^|\s)red(?!\S)/) || this.className.match(/(?:^|\s)square(?!\S)/) ){
                         wrong = 1;
-                        content.innerHTML += '<p id="list' + clickCount + '">Wrong! 0</p>';
-                        document.getElementById('list' + clickCount).style.color = 'red';
                     } else if (this.style.borderColor == 'transparent transparent red') {
                         wrong = 1;
-                        content.innerHTML += '<p id="list' + clickCount + '">Wrong! 0</p>';
-                        document.getElementById('list' + clickCount).style.color = 'red';
                     } else {
                         wrong = 0;
                     }
@@ -611,6 +645,12 @@ window.Test = (function() {
                         content.innerHTML += '<p id="list' + clickCount + '">Correct! +1</p>';
                         document.getElementById('list' + clickCount).style.color = 'green';
                         Test.test5Score += 1;
+                        score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                                               Test.test4Score + Test.test5Score);
+                    } else {
+                        content.innerHTML += '<p id="list' + clickCount + '">Wrong! -2</p>';
+                        document.getElementById('list' + clickCount).style.color = 'red';
+                        Test.test5Score -= 2;
                         score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
                                                                Test.test4Score + Test.test5Score);
                     }

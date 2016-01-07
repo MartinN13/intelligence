@@ -11,6 +11,7 @@ window.Test = (function() {
         "test3Score": 0,
         "test4Score": 0,
         "test5Score": 0,
+        "timer2": null,
 
         // Next page button logic
         "clickFunction": function() {
@@ -223,7 +224,8 @@ window.Test = (function() {
                     <p><br><br>Click on next page to start the test.</p>';
             } else if (test == 6.0) {
                 // Initialise resluts page
-
+                nextpage.style.display = 'none';
+                score.style.display = 'none';
                 var result = Math.floor((Test.test1Score + Test.test2Score + Test.test3Score + 
                               Test.test4Score + Test.test5Score) / 36 * 100);
                 content.innerHTML = 
@@ -235,17 +237,21 @@ window.Test = (function() {
                     <p>Test 3: ' + Test.test3Score + ' out of 9 points</p> \
                     <p>Test 4: ' + Test.test4Score + ' out of 10 points</p> \
                     <p>Test 5: ' + Test.test5Score + ' out of 5 points</p> \
-                    <p><br>Total: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
-                                       Test.test4Score + Test.test5Score) + ' out of 36 points</p> \
+                    <h2><br>Total: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
+                                       Test.test4Score + Test.test5Score) + ' out of 36 points</h2> \
                     <p><br>This gives you a score of ' + result + '%, which means you are:</p>';
 
-                    if (result < 5) {
+                    if ((Test.test1Score + Test.test2Score + Test.test3Score + 
+                         Test.test4Score + Test.test5Score) < 5) {
                         content.innerHTML += '<h2>A (little) bit stupid!</h>';
-                    } else if (result < 10) {
+                    } else if ((Test.test1Score + Test.test2Score + Test.test3Score + 
+                                Test.test4Score + Test.test5Score) < 10) {
                         content.innerHTML += '<h2>Below average!</h>';
-                    } else if (result < 20) {
+                    } else if ((Test.test1Score + Test.test2Score + Test.test3Score + 
+                                Test.test4Score + Test.test5Score) < 20) {
                         content.innerHTML += '<h2>Average!</h>';
-                    } else if (result < 30) {
+                    } else if ((Test.test1Score + Test.test2Score + Test.test3Score + 
+                                Test.test4Score + Test.test5Score) < 30) {
                         content.innerHTML += '<h2>Very smart!</h>';
                     } else {
                         content.innerHTML += '<h2>A genius!</h>';
@@ -529,7 +535,7 @@ window.Test = (function() {
                 var currentObject = 1;
 
                 var objectCheck = function() {
-                    if ('object' + currentObject == this.id) {
+                    if ('object' + currentObject == this.id && currentObject < 11) {
                         document.getElementById('list' + currentObject).style.fontWeight = '';
                         document.getElementById('list' + currentObject).style.color = 'green';
                         document.getElementById('list' + currentObject).innerHTML += ' +1';
@@ -538,7 +544,7 @@ window.Test = (function() {
                         Test.test4Score += 1;
                         score.innerHTML = 'Current score: ' + (Test.test1Score + Test.test2Score + Test.test3Score + 
                                                                Test.test4Score + Test.test5Score);
-                    } else {
+                    } else if (currentObject < 11) {
                         document.getElementById('list' + currentObject).style.fontWeight = '';
                         document.getElementById('list' + currentObject).style.color = 'red';
                         document.getElementById('list' + currentObject).innerHTML += ' -1';
@@ -658,17 +664,17 @@ window.Test = (function() {
                 };
 
                 // Give each object its attributes
-                var timer2 = setInterval(function() {
+                Test.timer2 = setInterval(function() {
                     if (counter == 20) {
                         content.innerHTML = '<h2 id=>Test 5</h2> \
                                             <h2 id="wrong">Time is up!<br>Game over</h2>';
                         if (Test.test5Score == 1) {
-                            content.innerHTML += '<h2>You got ' + Test.test5Score + ' objects right!</h2>';
+                            content.innerHTML += '<h2>You got ' + Test.test5Score + ' object right!</h2>';
                         } else {
                             content.innerHTML += '<h2>You got ' + Test.test5Score + ' objects right!</h2>';
                         }
                         nextpage.style.display = 'inline-block';
-                        clearInterval(timer2);
+                        clearInterval(Test.timer2);
                     } else if (counter % 2 === 0) {
                         content.innerHTML += '<div id="object' + objectCount + '"></div>';
                         randomAttributes(document.getElementById('object' + objectCount), (objectCount - 1), 5);
@@ -702,11 +708,19 @@ window.Test = (function() {
                 Test.test3Score = 0;
                 Test.testLevel = 3.0;
                 Test.clickFunction();
-            }　else if (Test.testLevel == 4.1　|| Test.testLevel == 5.0) {
+            } else if (Test.testLevel == 4.1　|| Test.testLevel == 5.0) {
                 // Remove score from test 4 and re-initialise it
                 console.log('Reseting test 4.');
                 Test.test4Score = 0;
                 Test.testLevel = 4.0;
+                Test.clickFunction();
+            } else if (Test.testLevel == 5.1　|| Test.testLevel == 6.0) {
+                // Remove score from test 5 and re-initialise it
+                console.log('Reseting test 5.');
+                clearInterval(Test.timer2);
+                Test.counter = 0;
+                Test.test5Score = 0;
+                Test.testLevel = 5.0;
                 Test.clickFunction();
             }
             // Make next page link visible and reload score

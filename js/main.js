@@ -13,7 +13,11 @@ window.Test = (function() {
         "test5Score": 0,
         "timer2": null,
 
-        // Next page button logic
+        /**
+         * Handles test launching.
+         *
+         * @this {a element}
+         */
         "clickFunction": function() {
             if (Test.testLevel == 1.0) {
                 // Load test 1 description
@@ -82,7 +86,11 @@ window.Test = (function() {
             }
         },
 
-        // Checks if the answer is right or wrong, then displays next page button
+        /**
+         * Checks if a radio button is correct or not.
+         *
+         * @this {radio button}
+         */
         "radioClick": function() {
             if (this.id == 'question1.1' || this.id == 'question1.2' || this.id == 'question1.3') {
                 if (this.id == 'question1.1') {
@@ -160,7 +168,11 @@ window.Test = (function() {
             }
         },
 
-        // Handles button logic in test 2
+        /**
+         * Checks if a button is correct or not.
+         *
+         * @this {button}
+         */
         "buttonClick": function() {
             if (this.id == 'button4') {
                 content.innerHTML += "<h2 id='right'><br>You were right!<br>+3 points!</h2>";
@@ -173,7 +185,11 @@ window.Test = (function() {
             nextpage.style.display = 'inline-block';
         },
 
-        // Initiates a test description
+        /**
+         * Draws a test description.
+         *
+         * @param {number} test The test description that should be drawn.
+         */
         "initTestDesc": function(test) {
             if (test == 1.0) {
                 // Initialise test 1 description
@@ -259,9 +275,19 @@ window.Test = (function() {
             }
         },
 
-        // Initialises a test
+        /**
+         * Initiates a test.
+         *
+         * @param {number} test The test that should be drawn.
+         */
         "initTest": function(test) {
-            // Gives an object random attributes
+            /**
+             * Gives a div element a color, position, and shape.
+             *
+             * @param {div} element The div that should be modified.
+             * @param {number} count Decides which color and shape the div will receive.
+             * @param {number} test Distinguishes between which test the function is used for.
+             */
             var randomAttributes = function(element, count, test) {
                 // Add 'object' class
                 element.className += 'object';
@@ -413,7 +439,13 @@ window.Test = (function() {
                 // Shuffle flag numbers
                 var shuffle;
                 var flagArray = ['flag1', 'flag2', 'flag3', 'flag4', 'flag5', 'flag6', 'flag7', 'flag8', 'flag9'];
-                
+
+                /**
+                 * Shuffles an array.
+                 *
+                 * @param {array} o The array to be shuffled.
+                 * @return {array} The shuffled array.
+                 */
                 shuffle = function(o){ //http://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array-in-javascript
                     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
                     return o;
@@ -447,6 +479,11 @@ window.Test = (function() {
 
                 var currentFlag = 1;
 
+                /**
+                 * Checks if a flag matches the variable currentFlag.
+                 *
+                 * @this {div}
+                 */
                 var flagCheck = function() {
                     if ('flag' + currentFlag == this.className) {
                         // Make flag visible and mark list item green
@@ -534,6 +571,11 @@ window.Test = (function() {
 
                 var currentObject = 1;
 
+                /**
+                 * Checks if an object matches the variable currentObject.
+                 *
+                 * @this {div}
+                 */
                 var objectCheck = function() {
                     if ('object' + currentObject == this.id && currentObject < 11) {
                         document.getElementById('list' + currentObject).style.fontWeight = '';
@@ -632,7 +674,11 @@ window.Test = (function() {
                 var objectCount = 1;
                 var clickCount = 1;
 
-                // Checks if an elements classname matches red or square
+                /**
+                 * Checks if an element's classname contains red, or square, or both.
+                 *
+                 * @this {div}
+                 */
                 var objectCheck2 = function() {
                     var wrong;
                     console.log(this.style.borderColor);
@@ -688,7 +734,9 @@ window.Test = (function() {
             }
         },
 
-        // Restarts a test
+        /**
+         * Redraws a test and resets its score.
+         */
         "reset": function() {
             if (Test.testLevel == 1.1 || Test.testLevel == 1.2 || Test.testLevel == 1.3 || Test.testLevel == 2.0) {
                 // Remove score from test 1 and re-initialise it
